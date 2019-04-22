@@ -1,0 +1,23 @@
+Quanti sono i numeri di macchina normalizzati della doppia precisione IEEE? Argomentare la risposta.
+
+\hspace{1cm}
+\par\noindent\rule{\textwidth}{0.4pt}
+\hspace{1cm}
+
+Nella doppia precisione IEEE si utilizzano 64 bit per rappresentare un numero in virgola mobile in macchina.
+Di questi, il primo bit è riservato al segno $\pm$, i 52 bit successivi rappresentano la mantissa $\rho$ e i restanti 11 l'esponente $\eta$.
+Un numero reale può essere rappresentato in macchina mediante la formula $r=\pm \rho \eta$, con $\rho=\sum_{i=1}^{m} \alpha_\mathrm{i}b^{1-i}$ e $\eta=b^{e-\nu}$.
+Nel caso dei numeri normalizzati, abbiamo delle restrizioni sui numeri rappresentabili in macchina:
+\begin{itemize}
+	\item La mantissa è assunta della forma $1.f$ 
+	\item Lo shift $\nu$ è pari a 1023
+	\item Il valore $e$ deve essere compreso tra 0 e 2047, estremi esclusi
+\end{itemize}
+Dunque, per ricavare il numero di numeri normalizzati della doppia precisione IEEE, contiamo le possibili combinazioni di bit, date le condizioni sopra definite:\\
+\begin{itemize}
+	\item Per il segno abbiamo solo due possibilità, $+$ oppure $-$
+	\item Per la mantissa abbiamo esattamente $2^{52}$ opzioni
+	\item Per il valore di $e$ abbiamo esattamente 2046 opzioni
+\end{itemize}
+Dato che lo shift $\nu$ non cambia il numero di combinazioni possibili, moltiplicando i dati sopra ottenuti si ottiene:\\
+$$2\times2^{52}\times2046=2^{53}\times2046=\numprint{18428729675200069632}$$

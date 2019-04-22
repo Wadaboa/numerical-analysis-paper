@@ -1,0 +1,82 @@
+\documentclass[a4paper]{article}
+\usepackage{hyperref}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage[export]{adjustbox}
+\usepackage[english]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{url}
+\usepackage{import}
+\usepackage{multirow}
+\usepackage{color}
+\usepackage{fancyhdr}
+\usepackage{amssymb}
+\usepackage{tabu}
+\usepackage{mathtools}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{listings}
+\usepackage{titling}
+\usepackage{listingsutf8}
+\usepackage[utf8]{inputenc}
+\usepackage[numbered,framed]{matlab-prettifier}
+\usepackage{amsmath}
+\usepackage{animate}
+\usepackage[labelformat=empty]{caption}
+\usepackage{subfig}
+\usepackage{numprint}
+
+\setlength{\parindent}{0pt}
+
+\let\ph\mlplaceholder
+\lstMakeShortInline"
+
+\newcommand{\bnb}{\begin{nobreak}}
+\newcommand{\enb}{\end{nobreak}}
+
+\lstset{
+	style              = Matlab-editor,
+  	basicstyle         = \mlttfamily,
+  	escapechar         = ",
+  	mlshowsectionrules = true,
+}
+
+\pretitle{
+	\begin{center}
+  		\LARGE
+  		\includegraphics[width=\textwidth/4]{assets/logo-unifi.png}\\[\bigskipamount]
+}
+\posttitle{\end{center}}
+
+\title{\vspace{2cm}Elaborato di\\ \textbf{Calcolo Numerico}\\ Anno Accademico 2018/2019\vspace{1cm}}
+
+\author
+{Alessio Falai - \texttt{6134275} alessio.falai@stud.unifi.it\\Leonardo Calbi - \texttt{6155786} leonardo.calbi@stud.unifi.it}
+
+\date{}
+
+\addto\captionsenglish{\renewcommand{\contentsname}{Capitoli}}
+
+\begin{document}
+
+\pagenumbering{Roman}
+\lstset{inputencoding=latin1}
+	
+\maketitle
+
+\begin{center}
+	\today{}
+\end{center}
+
+\newpage
+
+\newpage
+
+\tableofcontents
+\newpage
+
+\pagenumbering{arabic}
+
+\input{Chapter1/Chapter1.tex}
+\newpage
+\end{document}
