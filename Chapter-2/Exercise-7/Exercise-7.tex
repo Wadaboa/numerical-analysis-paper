@@ -1,0 +1,70 @@
+Calcolare la molteplicità della radice nulla della funzione
+$$f(x)=x^{2}sin(x^{2}).$$
+Confrontare, quindi, i metodi di Newton, Newton modificato, e di Aitken, per approssimarla per gli
+stessi valori di $tol$ del precedente esercizio (ed utilizzando il medesimo criterio di arresto),
+partendo da $x_\mathrm{0}=1$. Tabulare e commentare i risultati ottenuti.
+
+\hspace{1cm}
+\par\noindent\rule{\textwidth}{0.4pt}
+\hspace{1cm}
+
+\textbf{Metodo di Newton modificato}:
+\lstinputlisting[language=Matlab]{Chapter-2/Exercise-7/modnewton.m}
+\textbf{Metodo di accelerazione di Aitken}:
+\lstinputlisting[language=Matlab]{Chapter-2/Exercise-7/aitken.m}
+
+Dato che il metodo di Newton modificato richiede espressamente la molteplicità della radice 
+della funzione in esame, andiamo a calcolarla:\\
+$$x^{2}sin(x^{2})=0 \rightarrow x^{2}=0 \lor sin(x^{2})=0$$
+Le radici del polinomio sono $0$ e $k\sqrt{\pi}$, con $k\in\mathbb{Z}$.
+La molteplicità della radice $x=0$ è pari a 3, mentre quella della radice $x=k\sqrt{\pi}$ è pari a 1.
+Dunque, nel nostro caso, per l'utilizzo del metodo di Newton modificato, inizializzeremo il valore $m$
+relativo alla molteplicità a 3.
+
+\begin{lstlisting}[language=Matlab, caption=Codice Matlab]
+	f = @(x) x^2 * sin(x^2);
+	f1 = @(x) 2 * x * (sin(x^2) + x^2 * cos(x^2));
+	x0 = 1;
+	imax = 1000;
+	m = 3;
+	for i = 1 : 12
+		tol = 10^(-i);
+		rtol=['Tolleranza: ', num2str(tol, '%e')];
+		disp(rtol)
+		[xN, it] = newton(f, f1, x0, imax, tol);
+		disp(['Newton: ', num2str(xN, '%10.12e'), ' Iterazioni ', num2str(it)])
+		[xNM, it] = modnewton(f, f1, x0, m, imax, tol);
+		disp(['Newton Modificato: ', num2str(xNM, '%10.12e'), ' Iterazioni ', num2str(it)])
+		[xA, it] = aitken(f, f1, x0, imax, tol);
+		disp(['Aitken: ', num2str(xA, '%10.12e'), ' Iterazioni ', num2str(it)])
+		disp(' ')
+	end
+\end{lstlisting}
+
+\begin{table}[H]
+\caption{Risultati}
+\centering
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|}
+\hline
+& \multicolumn{2}{c|}{\textbf{Newton}} & \multicolumn{2}{c|}{\textbf{Newton modificato}} & \multicolumn{2}{c|}{\textbf{Aitken}} \\ \hline
+Tolleranza & Risultato & Iterazioni & Risultato & Iterazioni & Risultato & Iterazioni \\ \hline
+$10^{-1}$ & 3.843178806071e-01 & 2 & 2.163225010255e-02 & 1 & 6.492908618812e-19 & 3\\ \hline
+$10^{-2}$ & 2.880513930938e-02 & 11 & 1.352015482798e-03 & 3 & 6.492908618812e-19 & 3\\ \hline
+$10^{-3}$ & 2.883766303035e-03 & 19 & 8.450096767474e-05 & 5 & 6.492908618812e-19 & 3\\ \hline
+$10^{-4}$ & 2.887022508866e-04 & 27 & 2.112524191869e-05 & 6 & 0.000000000000e+00 & 4\\ \hline
+$10^{-5}$ & 2.890282391460e-05 & 35 & 1.320327619918e-06 & 8 & 0.000000000000e+00 & 4\\ \hline
+$10^{-6}$ & 2.893545954951e-06 & 43 & 3.300819049795e-07 & 9 & 0.000000000000e+00 & 4\\ \hline
+$10^{-7}$ & 2.896813203496e-07 & 51 & 2.063011906122e-08 & 11 & 0.000000000000e+00 & 4\\ \hline
+$10^{-8}$ & 2.900084141257e-08 & 59 & 1.289382441326e-09 & 13 & 0.000000000000e+00 & 4\\ \hline
+$10^{-9}$ & 2.903358772398e-09 & 67 & 3.223456103315e-10 & 14 & 0.000000000000e+00 & 4\\ \hline
+$10^{-10}$ & 2.906637101090e-10 & 75 & 2.014660064572e-11 & 16 & 0.000000000000e+00 & 4\\ \hline
+$10^{-11}$ & 2.909919131508e-11 & 83 & 1.259162540357e-12 & 18 & 0.000000000000e+00 & 4\\ \hline
+$10^{-12}$ & 2.913204867832e-12 & 91 & 3.147906350894e-13 & 19 & 0.000000000000e+00 & 4\\ \hline
+\end{tabular}%
+}
+\end{table}
+
+Analizzando i risultati ottenuti, abbiamo verificato che il metodo di Newton impiega
+un numero considerevolmente maggiore di iterazioni rispetto ai metodi di Newton modificato e Aitken, a paritá di tolleranza utilizzata. 
+Questo è dato dal fatto che il primo ha convergenza lineare (in caso di radici multiple), mentre i secondi due hanno convergenza quadratica.

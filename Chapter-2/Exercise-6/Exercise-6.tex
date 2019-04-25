@@ -1,0 +1,61 @@
+Utilizzare la $function$ del precedente esercizio per determinare un'approssimazione della
+radice della funzione
+$$f(x)=x-e^{-x}cos(\frac{x}{100}))$$
+per $tol=10^{-i}, i=1,2,...,12$, partendo da $x_\mathrm{0}=-1$. Per il metodo di bisezione utilizzare 
+$[-1,1]$, come intervallo di confidenza iniziale. Tabulare i risultati, in modo da confrontare le iterazioni
+richieste da ciascun metodo. Commentare il relativo costo computazionale.
+
+\hspace{1cm}
+\par\noindent\rule{\textwidth}{0.4pt}
+\hspace{1cm}
+
+\begin{lstlisting}[language=Matlab, caption=Codice Matlab]
+	f = @(x) x - exp(-x) * cos(x / 100);
+	f1 = @(x) 1 + exp(-x) * cos(x / 100) + (exp(-x) * sin(x / 100)) / 100;
+	x0 = -1;
+	a = -1;
+	b = 1;
+	imax = 1000;
+	for i = 1 : 12
+		tol = 10^(-i);
+		rtol=['Tolleranza: ',num2str(tol, '%e')];
+		disp(rtol)
+		[xB, it] = bisection(f, a, b, tol);
+		disp(['Bisezione: ', num2str(xB, '%10.12e'), ' Iterazioni ', num2str(it)])
+		[xN, it] = newton(f, f1, x0, imax, tol);
+		disp(['Newton: ', num2str(xN, '%10.12e'), ' Iterazioni ', num2str(it)])
+		[xC, it] = chord(f, f1, x0, imax, tol);
+		disp(['Corde: ', num2str(xC, '%10.12e'), ' Iterazioni ', num2str(it)])
+		[xS, it] = secant(f, f1, x0, imax, tol);
+		disp(['Secanti: ', num2str(xS, '%10.12e'), ' Iterazioni ', num2str(it)])
+		disp(' ')
+	end
+\end{lstlisting}
+
+\begin{table}[h]
+\caption{Risultati}
+\centering
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|}
+\hline
+& \multicolumn{2}{c|}{\textbf{Bisezione}} & \multicolumn{2}{c|}{\textbf{Newton}} & \multicolumn{2}{c|}{\textbf{Secanti}} & \multicolumn{2}{c|}{\textbf{Corde}} \\ \hline
+Tolleranza & Risultato & Iterazioni & Risultato & Iterazioni & Risultato & Iterazioni & Risultato & Iterazioni \\ \hline
+$10^{-1}$ & 5.000000000000e-01 & 3 & 5.663058026183e-01 & 2 & 5.662928457961e-01 & 3 & 4.021808606807e-01 & 3 \\ \hline
+$10^{-2}$ & 5.625000000000e-01 & 6 & 5.671373451066e-01 & 3 & 5.671339926161e-01 & 4 & 5.495185718942e-01 & 7 \\ \hline
+$10^{-3}$ & 5.664062500000e-01 & 10 & 5.671373451066e-01 & 3 & 5.671339926161e-01 & 4 & 5.651741531555e-01 & 11 \\ \hline
+$10^{-4}$ & 5.671386718750e-01 & 14 & 5.671374702932e-01 & 4 & 5.671374697616e-01 & 5 & 5.670103627779e-01 & 16 \\ \hline
+$10^{-5}$ & 5.671386718750e-01 & 14 & 5.671374702932e-01 & 4 & 5.671374697616e-01 & 5 & 5.671232371728e-01 & 20 \\ \hline
+$10^{-6}$ & 5.671386718750e-01 & 14 & 5.671374702932e-01 & 4 & 5.671374702932e-01 & 6 & 5.671358764609e-01 & 24 \\ \hline
+$10^{-7}$ & 5.671374797821e-01 & 24 & 5.671374702932e-01 & 4 & 5.671374702932e-01 & 6 & 5.671372918144e-01 & 28 \\ \hline
+$10^{-8}$ & 5.671374797821e-01 & 24 & 5.671374702932e-01 & 5 & 5.671374702932e-01 & 6 & 5.671374503070e-01 & 32 \\ \hline
+$10^{-9}$ & 5.671374704689e-01 & 31 & 5.671374702932e-01 & 5 & 5.671374702932e-01 & 6 & 5.671374689985e-01 & 37 \\ \hline
+$10^{-10}$ & 5.671374702360e-01 & 34 & 5.671374702932e-01 & 5 & 5.671374702932e-01 & 7 & 5.671374701482e-01 & 41 \\ \hline
+$10^{-11}$ & 5.671374702943e-01 & 36 & 5.671374702932e-01 & 5 & 5.671374702932e-01 & 7 & 5.671374702770e-01 & 45 \\ \hline
+$10^{-12}$ & 5.671374702943e-01 & 36 & 5.671374702932e-01 & 5 & 5.671374702932e-01 & 7 & 5.671374702914e-01 & 49 \\ \hline
+\end{tabular}%
+}
+\end{table}
+
+Analizzando i risultati ottenuti, abbiamo verificato che i metodi di bisezione e corde impiegano
+un numero considerevolmente maggiore di iterazioni rispetto ai metodi di Newton e secanti, a paritá di tolleranza utilizzata. 
+Questo è dato dal fatto che i primi due hanno convergenza lineare, mentre i secondi due hanno convergenza quadratica.

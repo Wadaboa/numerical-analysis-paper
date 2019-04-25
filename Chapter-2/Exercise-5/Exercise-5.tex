@@ -1,0 +1,24 @@
+Scrivere $function$ Matlab distinte che implementino efficientemente 
+i seguenti metodi per la ricerca degli zeri di una funzione:
+\begin{itemize}
+	\item Metodo di bisezione;
+	\item Metodo di Newton;
+	\item Metodo delle secanti;
+	\item Metodo delle corde.
+\end{itemize}
+Detta $x_\mathrm{i}$, l'approssimazione al passo $i$-esimo, utilizzare come criterio di arresto
+$$|\Delta x_\mathrm{i}| \leq tol\cdot(1+|x_\mathrm{i}|),$$
+essendo $tol$ una opportuna tolleranza specificata in ingresso.
+
+\hspace{1cm}
+\par\noindent\rule{\textwidth}{0.4pt}
+\hspace{1cm}
+
+\textbf{Metodo di bisezione}:
+\lstinputlisting[language=Matlab]{Chapter-2/Exercise-5/bisection.m}
+\textbf{Metodo di Newton}:
+\lstinputlisting[language=Matlab]{Chapter-2/Exercise-5/newton.m}
+\textbf{Metodo delle secanti}:
+\lstinputlisting[language=Matlab]{Chapter-2/Exercise-5/secant.m}
+\textbf{Metodo delle corde}:
+\lstinputlisting[language=Matlab]{Chapter-2/Exercise-5/chord.m}
