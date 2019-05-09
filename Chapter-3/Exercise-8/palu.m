@@ -7,13 +7,13 @@ function [A, p] = palu (A)
 %
 [m, n] = size(A);
 if m ~= n
-    error('Matrice non quadrata!');
+    error('Matrice non quadrata.');
 end
 p = 1 : n;
 for i = 1 : n - 1
     [mi, ki] = max(abs(A(i : n, i)));
     if mi == 0 
-        error('Matrice singolare!')
+        error('Matrice singolare.')
     end
     ki = ki + i - 1;
     if ki > i

@@ -4,7 +4,6 @@ function [x, i] = modnewton(f, f1, x0, m, imax, tol)
 %                                             in ingresso, con molteplicita' multipla,
 %                                             utilizzando il metodo di Newton modificato.
 %
-%
 fx = feval(f, x0);
 f1x = feval(f1, x0);
 x = x0 - m * (fx / f1x);

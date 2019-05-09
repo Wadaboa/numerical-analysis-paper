@@ -37,3 +37,4 @@ while go && i < imax
     go = abs(x - x0) > tol * (1 + abs(x));
 end
 if go, disp('Il metodo non converge.'), end
+return

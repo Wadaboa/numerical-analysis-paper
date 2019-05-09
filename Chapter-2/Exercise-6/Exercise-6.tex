@@ -10,26 +10,26 @@ richieste da ciascun metodo. Commentare il relativo costo computazionale.
 \hspace{1cm}
 
 \begin{lstlisting}[language=Matlab, caption=Codice Matlab]
-	f = @(x) x - exp(-x) * cos(x / 100);
-	f1 = @(x) 1 + exp(-x) * cos(x / 100) + (exp(-x) * sin(x / 100)) / 100;
-	x0 = -1;
-	a = -1;
-	b = 1;
-	imax = 1000;
-	for i = 1 : 12
-		tol = 10^(-i);
-		rtol=['Tolleranza: ',num2str(tol, '%e')];
-		disp(rtol)
-		[xB, it] = bisection(f, a, b, tol);
-		disp(['Bisezione: ', num2str(xB, '%10.12e'), ' Iterazioni ', num2str(it)])
-		[xN, it] = newton(f, f1, x0, imax, tol);
-		disp(['Newton: ', num2str(xN, '%10.12e'), ' Iterazioni ', num2str(it)])
-		[xC, it] = chord(f, f1, x0, imax, tol);
-		disp(['Corde: ', num2str(xC, '%10.12e'), ' Iterazioni ', num2str(it)])
-		[xS, it] = secant(f, f1, x0, imax, tol);
-		disp(['Secanti: ', num2str(xS, '%10.12e'), ' Iterazioni ', num2str(it)])
-		disp(' ')
-	end
+f = @(x) x - exp(-x) * cos(x / 100);
+f1 = @(x) 1 + exp(-x) * cos(x / 100) + (exp(-x) * sin(x / 100)) / 100;
+x0 = -1;
+a = -1;
+b = 1;
+imax = 1000;
+for i = 1 : 12
+	tol = 10^(-i);
+	rtol=['Tolleranza: ',num2str(tol, '%e')];
+	disp(rtol)
+	[xB, it] = bisection(f, a, b, tol);
+	disp(['Bisezione: ', num2str(xB, '%10.12e'), ' Iterazioni ', num2str(it)])
+	[xN, it] = newton(f, f1, x0, imax, tol);
+	disp(['Newton: ', num2str(xN, '%10.12e'), ' Iterazioni ', num2str(it)])
+	[xC, it] = chord(f, f1, x0, imax, tol);
+	disp(['Corde: ', num2str(xC, '%10.12e'), ' Iterazioni ', num2str(it)])
+	[xS, it] = secant(f, f1, x0, imax, tol);
+	disp(['Secanti: ', num2str(xS, '%10.12e'), ' Iterazioni ', num2str(it)])
+	disp(' ')
+end
 \end{lstlisting}
 
 \begin{table}[h]

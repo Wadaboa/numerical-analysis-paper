@@ -22,23 +22,23 @@ Dunque, nel nostro caso, per l'utilizzo del metodo di Newton modificato, inizial
 relativo alla molteplicità a 3.
 
 \begin{lstlisting}[language=Matlab, caption=Codice Matlab]
-	f = @(x) x^2 * sin(x^2);
-	f1 = @(x) 2 * x * (sin(x^2) + x^2 * cos(x^2));
-	x0 = 1;
-	imax = 1000;
-	m = 3;
-	for i = 1 : 12
-		tol = 10^(-i);
-		rtol=['Tolleranza: ', num2str(tol, '%e')];
-		disp(rtol)
-		[xN, it] = newton(f, f1, x0, imax, tol);
-		disp(['Newton: ', num2str(xN, '%10.12e'), ' Iterazioni ', num2str(it)])
-		[xNM, it] = modnewton(f, f1, x0, m, imax, tol);
-		disp(['Newton Modificato: ', num2str(xNM, '%10.12e'), ' Iterazioni ', num2str(it)])
-		[xA, it] = aitken(f, f1, x0, imax, tol);
-		disp(['Aitken: ', num2str(xA, '%10.12e'), ' Iterazioni ', num2str(it)])
-		disp(' ')
-	end
+f = @(x) x^2 * sin(x^2);
+f1 = @(x) 2 * x * (sin(x^2) + x^2 * cos(x^2));
+x0 = 1;
+imax = 1000;
+m = 3;
+for i = 1 : 12
+	tol = 10^(-i);
+	rtol=['Tolleranza: ', num2str(tol, '%e')];
+	disp(rtol)
+	[xN, it] = newton(f, f1, x0, imax, tol);
+	disp(['Newton: ', num2str(xN, '%10.12e'), ' Iterazioni ', num2str(it)])
+	[xNM, it] = modnewton(f, f1, x0, m, imax, tol);
+	disp(['Newton Modificato: ', num2str(xNM, '%10.12e'), ' Iterazioni ', num2str(it)])
+	[xA, it] = aitken(f, f1, x0, imax, tol);
+	disp(['Aitken: ', num2str(xA, '%10.12e'), ' Iterazioni ', num2str(it)])
+	disp(' ')
+end
 \end{lstlisting}
 
 \begin{table}[H]
