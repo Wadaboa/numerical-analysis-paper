@@ -7,9 +7,9 @@ Eseguire il seguente $script$ Matlab:
 \end{lstlisting}
 Spiegare i risultati ottenuti.
 
-\hspace{1cm}
+\hspace*{\fill}
 \par\noindent\rule{\textwidth}{0.4pt}
-\hspace{1cm}
+\hspace*{\fill}
 
 I risultati ottenuti:
 \begin{lstlisting}[caption = {}]
@@ -23,12 +23,13 @@ u =
 L'obiettivo del programma proposto è verificare, dopo una serie di operazioni, che il numero restituito sia uguale a quello di partenza e
 che quindi non si abbia perdita di informazione.
 
-Prima di tutto viene impostato il formato di output a $longE$, formato long decimal (15 cifre dopo la virgola) con notazione scientifica.\\
+Prima di tutto viene impostato il formato di output a $longE$, formato long decimal (15 cifre dopo la virgola) con notazione scientifica.
 
-Alcune premesse:\\
+Alcune premesse:
+
 In caso di underflow, ovvero quando un calcolo produce un valore più piccolo di $realmin$, in accordo con l’opzione dello standard IEEE, 
 in MATLAB i numeri vengono denormalizzati, perdono quindi il primo 1 sottinteso e sono definiti dalla loro rappresentazione binaria.
-Inoltre, il più piccolo numero positivo denormalizzato è $\numprint{0.494}\times10^{-323}$. Ogni risultato più piccolo di questo è posto a zero.\\
+Inoltre, il più piccolo numero positivo denormalizzato è $\numprint{0.494}\times10^{-323}$. Ogni risultato più piccolo di questo è posto a zero.
 
 Alcune notazioni importanti:
 \begin{itemize}

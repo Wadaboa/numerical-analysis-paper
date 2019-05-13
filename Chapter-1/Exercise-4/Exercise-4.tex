@@ -8,9 +8,9 @@ Eseguire le seguenti istruzioni Matlab:
 \end{lstlisting}
 Spiegare i risultati ottenuti.
 
-\hspace{1cm}
+\hspace*{\fill}
 \par\noindent\rule{\textwidth}{0.4pt}
-\hspace{1cm}
+\hspace*{\fill}
 
 I risultati ottenuti:
 \begin{lstlisting}[caption = {}]
@@ -28,16 +28,19 @@ ans =
 
 \end{lstlisting}
 
-L'obiettivo del programma proposto è verificare se i risultati dati da operazioni di somma e sottrazione siano soggetti a cancellazione numerica o meno.\\
+L'obiettivo del programma proposto è verificare se i risultati dati da operazioni di somma e sottrazione siano soggetti a cancellazione numerica o meno.
 
 Innanzitutto, come nel precedente esercizio, viene impostato il formato di output a $longE$, formato long decimal (15 cifre dopo la virgola) con notazione scientifica.
+
 Dopodichè, osservando gli output ottenuti, l'operazione di somma risulta ben condizionata, mentre l'operazione di sottrazione di due numeri 
 molto vicini tra loro risulta invece mal condizionata.
 Tale malcondizionamento deriva dal fatto che in macchina la semplice operazione $a-b$ viene effettuata come $fl(fl(a)-fl(b))$, dove con $fl(x)$ 
-indichiamo il valore floating point del numero $x$.\\
-Dunque, il numero $a-b = realmin + eps\times4$, mentre invece dovrebbe essere $10^{-15}$. Calcolando i vari valori floating, otteniamo:\\
-$$fl(a) = \numprint{1.11111111111111093840975172498}$$\\
-$$fl(b) = \numprint{1.11111111111111005023133202485}$$\\
-$$fl(a) - fl(b) = \numprint{8.881784197001300}\times10^{-16}$$\\
-$$fl(fl(a) - fl(b)) = \numprint{8.881784197001252}\times10^{-16}$$\\
+indichiamo il valore floating point del numero $x$.
+
+Dunque, il numero $a-b = realmin + eps\times4$, mentre invece dovrebbe essere $10^{-15}$. Calcolando i vari valori floating, otteniamo:
+$$fl(a) = \numprint{1.11111111111111093840975172498}$$
+$$fl(b) = \numprint{1.11111111111111005023133202485}$$
+$$fl(a) - fl(b) = \numprint{8.881784197001300}\times10^{-16}$$
+$$fl(fl(a) - fl(b)) = \numprint{8.881784197001252}\times10^{-16}$$
+
 Abbiamo così ricostruito l'output restituito da Matlab, che è frutto di una propagazione dell'errore relativa alla rappresentazione dei numeri decimali in macchina.
