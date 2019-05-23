@@ -4,6 +4,8 @@ function I4 = adapsimp(f, a, b, tol, fa, fb, f1)
 %                               in [a, b], utilizzando le formule
 %                               adattative di Simpson
 %
+global ps;
+ps = ps + 2;
 I4 = 0;
 if a == b, return, end
 if b < a

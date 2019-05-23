@@ -1,0 +1,44 @@
+Sapendo che $$I(f) = \int_{0}^{atan(30)} (1+tan^{2}(x))dx = 30, $$ tabulare il numero di punti richiesti dalle formule adattative dei trapezi e di Simpson per approssimare $I(f)$ con tolleranze $$ tol = 10^{-i}, i = 2,...,8,$$ assieme ai relativi errori.
+
+\hspace*{\fill}
+\par\noindent\rule{\textwidth}{0.4pt}
+\hspace*{\fill}
+
+\begin{lstlisting}[language=Matlab, caption=Codice Matlab]
+f = @(x) 1 + tan(x)^2;
+global pt;
+global ps;
+a = 0;
+b = atan(30);
+format long e;
+for i = 2 : 8
+    pt = 2;
+    ps = 3;
+    tol = 10^-i;
+    I2 = adaptrap(f,a,b,tol);
+    I4 = adapsimp(f,a,b,tol);
+    pt
+    et = abs(I2 - 30)
+    ps
+    es = abs(I4 - 30)
+end
+\end{lstlisting}
+
+\begin{table}[H]
+    \caption{Risultati}
+    \centering
+    \resizebox{\textwidth}{!}{%
+    \begin{tabular}{|c|c|c|c|c|}
+        \hline
+            & \multicolumn{2}{c|}{\textbf{Trapezi}} & \multicolumn{2}{c|}{\textbf{Simpson}} \\ \hline
+        Tolleranza & Punti & Errore & Punti & Errore \\ \hline
+        $10^{-2}$ &  375 & 4.764530169460102e-03 & 49 & 2.372538178065042e-03 \\ \hline
+        $10^{-3}$ & 1181 & 5.737280523554489e-04 & 77 & 6.165282965362451e-04 \\ \hline
+        $10^{-4}$ & 3687 & 5.263954536971482e-05 & 137 & 5.016670867874495e-05 \\ \hline
+        $10^{-5}$ & 11883 & 5.454611955002520e-06 & 249 & 2.220652294937508e-06 \\ \hline
+        $10^{-6}$ & 37273 & 5.635538471437940e-07 & 425 & 3.981788339046943e-07 \\ \hline
+        $10^{-7}$ & 116747 & 5.255170520968022e-08 & 765 & 3.565320128018357e-08 \\ \hline
+        $10^{-8}$ & 375793 & 5.507661882120374e-09 & 1365 & 3.587672381399898e-09 \\ \hline
+    \end{tabular}%
+    }
+\end{table}

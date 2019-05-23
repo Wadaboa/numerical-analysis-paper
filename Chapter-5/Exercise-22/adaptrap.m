@@ -4,6 +4,8 @@ function I2 = adaptrap(f, a, b, tol, fa, fb)
 %                               in [a, b], utilizzando le formule
 %                               adattative dei trapezi
 %
+global pt;
+pt = pt + 1;
 I2 = 0;
 if a == b, return, end
 if b < a
