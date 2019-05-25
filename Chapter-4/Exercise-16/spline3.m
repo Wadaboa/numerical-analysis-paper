@@ -7,7 +7,7 @@ function y = spline3(xi, fi, x)
 if any(size(xi) ~= size(fi)) || size(xi, 2) ~= 1
     error('xi e fi devono essere vettori della stessa lunghezza.');
 end
-if length(xi) < 4, error('Sono necessari almeno 4 punti.'), end
+if length(xi) < 3, error('Sono necessari almeno 3 punti.'), end
 [xi, p] = sort(xi);
 fi = fi(p);
 

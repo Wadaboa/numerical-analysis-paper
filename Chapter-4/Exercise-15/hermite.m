@@ -12,14 +12,13 @@ fh(1 : 2 : 2 * n + 1) = fi;
 fh(2 : 2 : 2 * n + 2) = f1i;
 fh = divdif(xh, fh);
 y = horner(xh, fh, x);
-y = y.';
 return
 
 function fh = divdif(xh, fh)
 %
-% fh = divdif(xh, fh) Calcola le differenze divise 
-%                     sulle coppie (xh, fh)
+% fh = divdif(xh, fh) Calcola le differenze divise sulle coppie (xh, fh)
 %       
+%
 nh = length(xh) - 1;
 for i = nh : -2 : 3
     fh(i) = (fh(i) - fh(i - 2)) / (xh(i) - xh(i - 1));
