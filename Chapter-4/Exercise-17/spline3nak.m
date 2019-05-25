@@ -1,8 +1,8 @@
-function y = spline3(xi, fi, x)
+function y = spline3nak(xi, fi, x)
 %
-% y = spline3(xi, fi, x) Calcola la spline cubica naturale
-%                        su una partizione assegnata e
-%                        la valuta nelle ascisse date
+% y = spline3nak(xi, fi, x) Calcola la spline cubica not-a-knot
+%                           su una partizione assegnata e
+%                           la valuta nelle ascisse date
 %
 if any(size(xi) ~= size(fi)) || size(xi, 2) ~= 1
     error('xi e fi devono essere vettori della stessa lunghezza.');
@@ -17,14 +17,18 @@ n = length(h);
 phi = h(1 : n - 1) ./ (h(1 : n - 1) + h(2 : n));
 csi = 1 - phi;
 
+lower = [phi(1 : n - 2); phi(n - 1) - csi(n - 1); 0];
+main  = [1; 2 - phi(1); 2 * ones(n - 3, 1); 2 - csi(n - 1); 1];
+upper = [0; csi(1) - phi(1); csi(2 : n - 1)];
+
 d = (fi(2 : end) - fi(1 : end - 1)) ./ h;
 b = 6 * ((d(2 : n) - d(1 : n - 1)) ./ (h(1 : n - 1) + h(2 : n)));
+b = [b(1); b; b(end)];
 
-lower = phi(2 : n - 1);
-main = 2 * ones(n - 1, 1);
-upper = csi(1: n - 2);
+m = trid(main, lower, upper, b);
 
-m = [0; trid(main, lower, upper, b); 0];
+m(1) = m(1) - m(2) - m(3);
+m(end) = m(end) - m(end - 1) - m(end - 2);
 
 ri = fi(1 : end - 1) - (h.^2 .* m(1 : end - 1)) / 6;
 qi = d - (h .* (m(2 : end) - m(1 : end - 1))) / 6;
