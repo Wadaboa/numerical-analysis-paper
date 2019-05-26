@@ -1,0 +1,21 @@
+Scaricare la function \textbf{cremat} al sito
+\url{http://web.math.unifi.it/users/brugnano/appoggio/cremat.m}
+che crea sistemi lineari $n \times n$ la cui soluzione è il vettore $\textbf{x}=(1 \dots n)^{T}$.
+Eseguire, quindi, lo $script$ Matlab:
+\begin{lstlisting}[language=Matlab]
+n = 10;
+x = zeros(n, 15);
+for i = 1 : 15
+[A, b] = cremat(n, i);
+[LU, p] = palu(A);
+x(:, i) = lusolve(LU, p, b);
+end
+\end{lstlisting}
+Confrontare i risultati ottenuti con quelli attesi, e dare una spiegazione esauriente degli stessi.
+
+\hspace*{\fill}
+\par\noindent\rule{\textwidth}{0.4pt}
+\hspace*{\fill}
+
+\textbf{Funzione cremat}:
+\lstinputlisting[language=Matlab]{Chapter-3/Exercise-10/cremat.m}

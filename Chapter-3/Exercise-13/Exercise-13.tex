@@ -1,0 +1,22 @@
+Scaricare la function \textbf{cremat1} al sito
+\url{http://web.math.unifi.it/users/brugnano/appoggio/cremat1.m},
+che crea sistemi lineari $m \times n$ la cui soluzione (nel senso dei minimi quadrati) è il vettore $\textbf{x}=(1 \dots n)^{T}$.
+Eseguire, quindi, il seguente $script$ Matlab per testare le \textit{function} dei precedenti esercizi:
+\begin{lstlisting}[language=Matlab]
+for n = 5 : 10
+	xx = [1 : n]';
+	for m = n : n + 10
+		[A, b] = cremat1(m, n);
+		QR = myqr(A);
+		x = qrsolve(QR, b);
+		disp([m n norm(x - xx)])
+	end
+end
+\end{lstlisting}
+
+\hspace*{\fill}
+\par\noindent\rule{\textwidth}{0.4pt}
+\hspace*{\fill}
+
+\textbf{Funzione cremat1}:
+\lstinputlisting[language=Matlab]{Chapter-3/Exercise-13/cremat1.m}
