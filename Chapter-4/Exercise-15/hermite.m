@@ -2,7 +2,13 @@ function y = hermite(xi, fi, f1i, x)
 % 
 % y = hermite(xi, fi, f1i, x) Calcola il polinomio interpolante di grado n 
 %                             in forma di Hermite, nei punti x
-%    
+% 
+n = length(xi); if length(fi) ~= n, error('Dati inconsistenti.'), end
+for i = 1 : n - 1
+    for j = i + 1 : n
+        if xi(i) == xi(j), error('Ascisse non distinte.'), end
+    end
+end
 n = length(xi) - 1;
 xh = zeros(2 * n + 2, 1);
 xh(1 : 2 : 2 * n + 1) = xi;
