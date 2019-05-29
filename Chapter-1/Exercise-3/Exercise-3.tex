@@ -11,34 +11,33 @@ Spiegare i risultati ottenuti.
 \par\noindent\rule{\textwidth}{0.4pt}
 \hspace*{\fill}
 
-\underline{I risultati ottenuti}:
-\begin{lstlisting}[caption = {}]
-u = 
-	1.000000000000000e-300
-
-u = 
-	1.119916342203863e-300
-\end{lstlisting}
-
 L'obiettivo del programma proposto è verificare, dopo una serie di operazioni, che il numero restituito sia uguale a quello di partenza e
 che quindi non si abbia perdita di informazione.
 
-Prima di tutto viene impostato il formato di output a $longE$, formato long decimal (15 cifre dopo la virgola) con notazione scientifica.
-
 \underline{Alcune premesse}:
 
-In caso di underflow, ovvero quando un calcolo produce un valore più piccolo di $realmin$, in accordo con l’opzione dello standard IEEE, 
-in MATLAB i numeri vengono denormalizzati, perdono quindi il primo 1 sottinteso e sono definiti dalla loro rappresentazione binaria.
+In caso di underflow, ovvero quando un calcolo produce un valore più piccolo di $realmin$, in accordo con l’opzione dello standard IEEE,
+in Matlab i numeri vengono denormalizzati, perdono quindi il primo 1 sottinteso e sono definiti dalla loro rappresentazione binaria.
 Inoltre, il più piccolo numero positivo denormalizzato è $\numprint{0.494}\times10^{-323}$. Ogni risultato più piccolo di questo è posto a zero.
 
 \underline{Alcune notazioni importanti}:
 \begin{itemize}
-	\item $realmin$ è il minimo numero normalizzato rappresentabile in MATLAB
-	\item $realmax$ è il massimo numero normalizzato rappresentabile in MATLAB
+	\item $realmin$ è il minimo numero normalizzato rappresentabile in Matlab
+	\item $realmax$ è il massimo numero normalizzato rappresentabile in Matlab
 	\item $eps$ è la precisione di macchina
 \end{itemize}
 
-I primi 2 for effettuano prima 75 moltiplicazioni per 2 del numero $u$ e poi lo stesso numero di divisioni per 2 di $u$, 
+\underline{I risultati ottenuti}:
+\begin{lstlisting}[caption = {}]
+u =
+	1.000000000000000e-300
+
+u =
+	1.119916342203863e-300
+\end{lstlisting}
+
+Prima di tutto viene impostato il formato di output a $longE$, formato long decimal (15 cifre dopo la virgola) con notazione scientifica.
+Dopodichè, i primi 2 for effettuano prima 75 moltiplicazioni per 2 del numero $u$ e poi lo stesso numero di divisioni per 2 di $u$,
 mantenendone il valore al di sopra di $realmin$ e facendo sì che non ci sia perdita di informazione (underflow).
 I for successivi invece, a causa dello svolgersi prima delle 75 divisioni e poi delle 75 moltiplicazioni, portano alla denormalizzazione del numero e
 quindi a una sua approssimazione, che risulta nel valore finale di $u$.

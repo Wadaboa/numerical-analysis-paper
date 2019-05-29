@@ -8,12 +8,17 @@ partendo da $x_\mathrm{0}=1$. Tabulare e commentare i risultati ottenuti.
 \par\noindent\rule{\textwidth}{0.4pt}
 \hspace*{\fill}
 
-\textbf{Metodo di Newton modificato}:
-\lstinputlisting[language=Matlab]{Chapter-2/Exercise-7/modnewton.m}
-\textbf{Metodo di accelerazione di Aitken}:
-\lstinputlisting[language=Matlab]{Chapter-2/Exercise-7/aitken.m}
+\begin{minipage}{\textwidth}
+	\textbf{Metodo di Newton modificato}:
+	\lstinputlisting[language=Matlab]{Chapter-2/Exercise-7/modnewton.m}
+\end{minipage}
 
-Dato che il metodo di Newton modificato richiede espressamente la molteplicità della radice 
+\begin{minipage}{\textwidth}
+	\textbf{Metodo di accelerazione di Aitken}:
+	\lstinputlisting[language=Matlab]{Chapter-2/Exercise-7/aitken.m}
+\end{minipage}
+
+Dato che il metodo di Newton modificato richiede espressamente la molteplicità della radice
 della funzione in esame, andiamo a calcolarla:
 $$x^{2}sin(x^{2})=0 \rightarrow x^{2}=0 \lor sin(x^{2})=0$$
 Le radici del polinomio sono $0$ e $k\sqrt{\pi}$, con $k\in\mathbb{Z}$.
@@ -66,5 +71,5 @@ $10^{-12}$ & 2.913204867832e-12 & 91 & 3.147906350894e-13 & 19 & 0.000000000000e
 \end{table}
 
 Analizzando i risultati ottenuti, abbiamo verificato che il metodo di Newton impiega
-un numero considerevolmente maggiore di iterazioni rispetto ai metodi di Newton modificato e Aitken, a paritá di tolleranza utilizzata. 
+un numero considerevolmente maggiore di iterazioni rispetto ai metodi di Newton modificato e Aitken, a paritá di tolleranza utilizzata.
 Questo è dato dal fatto che il primo ha convergenza lineare (in caso di radici multiple), mentre i secondi due hanno convergenza quadratica.

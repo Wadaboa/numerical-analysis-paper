@@ -1,9 +1,19 @@
 function [x, i, imax] = bisection(f, a, b, tol)
 %
-% [x, i, imax] = bisection(f, a, b, tol) Determina uno zero della funzione in ingresso, 
-%                                        sull'intervallo [a, b], 
-%                                        utilizzando il metodo di bisezione.
+% [x, i, imax] = bisection(f, a, b[, tol]) Determina uno zero della funzione in ingresso,
+%                                          sull'intervallo [a, b],
+%                                          utilizzando il metodo di bisezione.
 %
+if nargin <= 3
+    tol = 1E-6;
+elseif tol <= 0 || tol >= 0.1
+    error('Tolleranza incosistente.');
+end
+if b < a
+    t = a;
+    a = b;
+    b = t;
+end
 fa = feval(f, a);
 fb = feval(f, b);
 if fa == 0
