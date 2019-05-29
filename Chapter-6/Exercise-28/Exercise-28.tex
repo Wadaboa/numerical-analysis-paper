@@ -1,4 +1,4 @@
-Con riferimento alla matrice $A_\mathrm{N}$ definita in (1), risolvere il sistema lineare $$A_\mathrm{N}\textbf{x} = \begin{pmatrix}1 \\ \vdots \\ 1\end{pmatrix} \in\mathbb{R}^{N}, $$
+Con riferimento alla matrice $A_\mathrm{N}$ definita in (\ref{eq:toeplitz}), risolvere il sistema lineare $$A_\mathrm{N}\textbf{x} = \begin{pmatrix}1 \\ \vdots \\ 1\end{pmatrix} \in\mathbb{R}^{N}, $$
 con i metodi di Jacobi e Gauss-Seidel, per $N = 10 : 10 : 500$, partendo dalla approssimazione nulla della soluzione, ed imponendo che la norma del residuo sia minore di $10^{-8}$. Utilizzare, a tal fine, la function dell'esercizio 26, scrivendo function ausiliarie \textit{ad hoc} (vedi esercizio 27) che sfruttino convenientemente la struttura di sparsità (nota) della matrice $A_\mathrm{N}$. Graficare il numero delle iterazioni richieste dai due metodi iterativi, rispetto ad $N$, per soddisfare il criterio di arresto prefissato.
 \hspace*{\fill}
 \par\noindent\rule{\textwidth}{0.4pt}
@@ -18,9 +18,9 @@ igs = zeros(50, 1);
 for n = 10 : 10 : 500
     b = ones(n, 1);
     x0 = zeros(n, 1);
-    [x, i] = splitting(b, @matvec, @jacobi, x0, tol);
+    [x, i] = asplit(b, @matvec, @jacobi, x0, tol);
     ij(n / 10) = i;
-    [x, i] = splitting(b, @matvec, @gs, x0, tol);
+    [x, i] = asplit(b, @matvec, @gs, x0, tol);
     igs(n / 10) = i;
 end
 plot(x, ij, x, igs);

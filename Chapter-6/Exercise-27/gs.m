@@ -1,21 +1,12 @@
-function [x, i] = gs(A, b, x0, tol, imax)
+function u = gs(r, A)
 %
-% [x, i] = gs(A, b[, x0[, tol[, imax]]]) risolve il sistema lineare
-%                                        Ax = b, con il metodo iterativo
-%                                        di Gauss-Seidel
+% u = gs(r, A) risolve il sistema lineare con
+%              il metodo iterativo di Gauss-Seidel
 %
-[m, n] = size(A);
-if m ~= n, error('Matrice non quadrata.'), end
-if n ~= length(b), error('Vettore dei termini noti inconsistente.'), end
-M = tril(A);
-N = M - A;
-if nargin <= 2
-    [x, i] = itersolve(M, N, b);
-elseif nargin <= 3
-    [x, i] = itersolve(M, N, b, x0);
-elseif nargin <= 4
-    [x, i] = itersolve(M, N, b, x0, tol);
-elseif nargin <= 5
-    [x, i] = itersolve(M, N, b, x0, tol, imax);
+u = r;
+n = length(r);
+for i = 1 : n
+    u(i) = u(i) / A(i, i);
+    u(i + 1 : n) = u(i + 1 : n) - A(i + 1 : n, i) * u(i);
 end
 return

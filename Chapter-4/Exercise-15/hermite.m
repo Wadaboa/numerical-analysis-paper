@@ -1,8 +1,7 @@
 function y = hermite(xi, fi, f1i, x)
-% 
-% y = hermite(xi, fi, f1i, x) Calcola il polinomio interpolante di grado n 
-%                             in forma di Hermite, nei punti x
-% 
+%
+% y = hermite(xi, fi, f1i, x) Calcola il polinomio interpolante di Hermite
+%
 n = length(xi); if length(fi) ~= n, error('Dati inconsistenti.'), end
 for i = 1 : n - 1
     for j = i + 1 : n
@@ -23,7 +22,6 @@ return
 function fh = divdif(xh, fh)
 %
 % fh = divdif(xh, fh) Calcola le differenze divise sulle coppie (xh, fh)
-%       
 %
 nh = length(xh) - 1;
 for i = nh : -2 : 3
@@ -39,9 +37,9 @@ return
 function y = horner(xh, fh, x)
 %
 % y = horner(xh, fh, x) Valuta il polinomio interpolante nelle ascisse xh,
-%                       se il vettore fh contiene i coefficienti di p, 
+%                       se il vettore fh contiene i coefficienti di p,
 %                       ordinati a partire dal termine noto
-% 
+%
 nh = length(xh) - 1;
 y = fh(nh + 1) * ones(size(x));
 for i = nh : -1 : 1

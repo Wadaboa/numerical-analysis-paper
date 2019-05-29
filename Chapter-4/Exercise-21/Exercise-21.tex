@@ -29,34 +29,33 @@ Graficare convenientemente i risultati ottenuti.
 
 \textbf{Approssimazione polinomiale ai minimi quadrati}:
 \lstinputlisting[language=Matlab]{Chapter-4/Exercise-21/lstsquare.m}
+\begin{minipage}{\textwidth}
+	\begin{lstlisting}[language=Matlab, caption=Codice Matlab]
+	xi = [0.010; 0.098; 0.127; 0.278; 0.547; 0.632; 0.815; 0.906; 0.913; 0.958; 0.965];
+	fi = [1.003626; 1.025686; 1.029512; 1.029130; 0.994781; 0.990156; 1.016687; 1.057382; 1.061462; 1.091263; 1.096476];
+	a = 0;
+	b = 2;
+	x = linspace(a, b, 10001);
+	n = length(xi);
+	tol = 1E-6;
+	[A, a, d] = lstsquare(xi, fi, tol);
 
-\begin{lstlisting}[language=Matlab, caption=Codice Matlab]
-xi = [0.010; 0.098; 0.127; 0.278; 0.547; 0.632; 0.815; 0.906; 0.913; 0.958; 0.965];
-fi = [1.003626; 1.025686; 1.029512; 1.029130; 0.994781; 0.990156; 1.016687; 1.057382; 1.061462; 1.091263; 1.096476];
-a = 0;
-b = 2;
-x = linspace(a, b, 10001);
-n = length(xi);
-tol = 1E-6;
-[A, a, d] = lstsquare(xi, fi, tol);
-
-for m = 1 : n - 1
-	p = polyval(A(1 : m, m), x);
-	plot(x, p)
-	hold on
-end
-legend('1', '2', '3', '4', '5', '6', '7', '8', '9', '10')
-hold off
-\end{lstlisting}
+	for m = 1 : n - 1
+		p = polyval(A(1 : m, m), x);
+		plot(x, p)
+		hold on
+	end
+	legend('1', '2', '3', '4', '5', '6', '7', '8', '9', '10')
+	hold off
+	\end{lstlisting}
+\end{minipage}
 
 La seguente figura mostra l'approssimazione polinomiale ai minimi quadrati, al variare del grado $n$ del polinomio interpolante ($=1,2,3,4...10$):
 \begin{figure}[H]
 	\includegraphics[width=\textwidth]{Chapter-4/Exercise-21/plot.jpg}
 	\caption*{Approssimazione polinomiale ai minimi quadrati, con grado $n=1,2,3,4...10$ del polinomio interpolante}
 \end{figure}
-
-In particolare, è possibile osservare che l'approssimazione migliore che rispetta l'accuratezza prefissata, pari a $10^{-6}$, è data dal polinomio interpolante di grado $n = 4$, con i seguenti coefficienti,
-rappresentati sotto forma tabellare a partire dal peso relativo al termine noto del polinomio:
+In particolare, è possibile osservare che l'approssimazione migliore di grado minimo che rispetta l'accuratezza prefissata, pari a $10^{-6}$, è data dal polinomio interpolante di grado $n = 4$, con i seguenti coefficienti, rappresentati sotto forma tabellare a partire dal peso relativo al termine noto del polinomio:
 \begin{table}[H]
 	\centering
 	\begin{tabular}{|c|c|c|}

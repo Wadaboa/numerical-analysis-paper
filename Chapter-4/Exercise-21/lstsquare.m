@@ -1,8 +1,9 @@
 function [A, a, d] = lstsquare(xi, fi, tol)
 %
-% lstsquare(xi, fi[, tol]) calcola il grado minimo, e i relativi coefficienti,
-%                          del polinomio che meglio approssima le coppie (xi, fi)
-%                          nel senso dei minimi quadrati
+% [A, a, d] = lstsquare(xi, fi[, tol]) calcola il grado minimo, e i relativi
+%                                      coefficienti, del polinomio che meglio
+%                                      approssima le coppie (xi, fi)
+%                                      nel senso dei minimi quadrati
 %
 n = length(xi);
 if n ~= length(fi), error('I dati devono essere vettori della stessa lunghezza.'), end

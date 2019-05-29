@@ -13,7 +13,7 @@ return
 
 function [x] = infsolve(L, x)
 n = length(x);
-for i = 1:n
+for i = 1 : n
     x(i + 1 : n) = x(i + 1 : n) - L(i + 1 : n, i) * x(i);
 end
 return
