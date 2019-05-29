@@ -21,7 +21,7 @@ for m = 1 : n - 1
     nr(m) = norm(V * A(1 : m, m) - fi, 2) ^ 2;
 end
 good = nr(nr <= tol);
-if length(good) <= 0, warning('Approssimazione non trovata nella tolleranza richiesta.'), end
-d = find(good==min(good), 1);
+if length(good) <= 0, error('Approssimazione non trovata nella tolleranza richiesta.'), end
+d = find(nr==good(1), 1);
 a = A(1 : d, d);
 return
