@@ -6,9 +6,9 @@ Eseguire, quindi, lo $script$ Matlab:
 n = 10;
 x = zeros(n, 15);
 for i = 1 : 15
-[A, b] = cremat(n, i);
-[LU, p] = palu(A);
-x(:, i) = lusolve(LU, p, b);
+    [A, b] = cremat(n, i);
+    [LU, p] = palu(A);
+    x(:, i) = lusolve(LU, p, b);
 end
 \end{lstlisting}
 Confrontare i risultati ottenuti con quelli attesi, e dare una spiegazione esauriente degli stessi.
@@ -19,3 +19,43 @@ Confrontare i risultati ottenuti con quelli attesi, e dare una spiegazione esaur
 
 \textbf{Funzione cremat}:
 \lstinputlisting[language=Matlab]{Chapter-3/Exercise-10/cremat.m}
+
+\begin{table}[H]
+    \caption{Risultati}
+	\centering
+	\begin{tabular}{|c|c|c|}
+		\hline
+		$i$ & Massimo errore & Numero di condizionamento \\
+		\hline
+		$1$ & $1.598721155460225e-14$ & $9.999999999999993e+00$ \\
+		$2$ & $2.753353101070388e-14$ & $1.000000000000007e+02$ \\
+		$3$ & $1.554312234475219e-13$ & $1.000000000000049e+03$ \\
+		$4$ & $3.860023412016744e-12$ & $1.000000000000200e+04$ \\
+		$5$ & $7.016609515630989e-12$ & $9.999999999958860e+04$ \\
+		$6$ & $7.698774950881671e-10$ & $1.000000000040872e+06$ \\
+		$7$ & $1.049847320189201e-09$ & $1.000000000226997e+07$ \\
+		$8$ & $1.049846023448708e-07$ & $9.999999948581542e+07$ \\
+		$9$ & $1.399794520295927e-07$ & $9.999999861922994e+08$ \\
+		$10$ & $3.499486487257286e-07$ & $9.999998100708477e+09$ \\
+        $11$ & $1.049845626388546e-04$ & $9.999987251617218e+10$ \\
+        $12$ & $6.999047618005960e-05$ & $9.999943857211329e+11$ \\
+        $13$ & $5.598784131253254e-03$ & $9.993857837121143e+12$ \\
+        $14$ & $7.993605777301127e-15$ & $9.973690669207928e+13$ \\
+        $15$ & $1.035840932326142e-01$ & $1.026900799258580e+15$ \\
+		\hline
+	\end{tabular}
+\end{table}
+Nella tabella soprastante è possibile osservare come varia il massimo errore sui risultati ottenuti, rispetto a quelli attesi, calcolato come la norma infinito del vettore differenza $e_\mathrm{i}=\widetilde{x_\mathrm{i}}-x$, con $\textbf{x}=(1 \dots n)^{T}$. Si può notare che l'errore aumenta all'aumentare del numero di iterazione $i$.
+Questo perchè tale valore corrisponde al paramentro $k$ della funzione \textbf{cremat}, che viene utilizzato per costruire una matrice diagonale, così formata:
+$$D_\mathrm{k}=\begin{pmatrix}
+    10^{-k} & & & & & &\\
+     &\frac{2}{n}& & & & \\
+     & &\frac{3}{n} & & & \\
+     & & &\ddots & & \\
+     & & & &\frac{n-1}{n} & \\
+     & & & & & 1
+\end{pmatrix} \in\mathbb{R}^{nxn}. $$
+Tale matrice diagonale viene moltiplicata per due matrici ortogonali $Q_\mathrm{1}$ e $Q_\mathrm{2}$ ($\in\mathbb{R}^{nxn}$), generate a partire dalla fattorizzazione \textit{QR} di due matrici casuali distinte. Osserviamo che, data una matrice ortogonale $Q$ $(Q^{-1} = Q^{T})$ e una matrice $A$, si ha $$\|QA\|=\sqrt{(QA,QA)}=\sqrt{(Q^TQA,A)}=\sqrt{(A,A)} = \|A\|,$$ dove $(\cdot,\cdot)$ è il prodotto scalare canonico; ovvero la norma euclidea di una matrice è invariante per moltiplicazione con una matrice ortogonale.
+Dunque $A = Q_\mathrm{1} \times D \times Q_\mathrm{2}$, con $$\|A\| = \|Q_\mathrm{1} \times D \times Q_\mathrm{2}\|= \|D\|.$$
+Per analizzare l'errore ottenuto, è necessario studiare il condizionamento della matrice $A$ per quanto riguarda il problema della risoluzione di un sistema lineare con dati in ingresso perturbati. Ricordando che il numero di condizionamento di tale problema risulta essere $k(A) = \|A\|\cdot\|A^{-1}\|$, nel nostro caso otteniamo $$k(A) = \|D\|\cdot\|D^{-1}\| =\|D^{-1}\|,$$ poichè $\|D\|=1$ e $$\|A^{-1}\|=\|(Q_\mathrm{1} \times D \times Q_\mathrm{2})^{-1}\|=\|Q_\mathrm{2}^{-1} \times D^{-1} \times Q_\mathrm{1}^{-1}\|=\|D^{-1}\|.$$
+Infine, osserviamo che i risultati ottenuti su $k(A)$ denotano un malcondizionamento della matrice al crescere di $i$, poichè $\|D^{-1}\|\rightarrow \infty$, per $i \rightarrow \infty$, per costruzione.
